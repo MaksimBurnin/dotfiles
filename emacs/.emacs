@@ -12,6 +12,17 @@
 (require 'nav)
 (require 'whitespace)
 
+;; Startup
+(setq initial-scratch-message "")
+(setq inhibit-startup-screen t)
+(scroll-bar-mode 0)
+(tool-bar-mode 0)
+(menu-bar-mode 0)
+(setq-default left-margin-width 2 right-margin-width 2)
+(set-window-margins nil 2 2)
+(set-fringe-mode 0)
+
+
 ;; Keybindings
 (global-set-key (kbd "C-x /") 'comment-or-uncomment-region)
 (global-set-key (kbd "C-h") 'delete-backward-char)
@@ -110,8 +121,6 @@
   (let ((truncated (member major-mode wraped-modes)))
     (setq truncate-lines (not truncated))))
 
-(setq after-change-major-mode-hook ())
-(setq before-change-functions ())
 (add-hook 'after-change-major-mode-hook 'decide-on-tabs)
 (add-hook 'after-change-major-mode-hook 'decide-on-wrap)
 (run-mode-hooks)
@@ -150,6 +159,4 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes (quote ("fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" default)))
- '(inhibit-startup-screen t)
- '(tool-bar-mode nil))
+ '(custom-safe-themes (quote ("fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" default))))
