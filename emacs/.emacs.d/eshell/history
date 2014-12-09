@@ -1,0 +1,128 @@
+rake routes
+killall ruby
+killall ruby
+killall rake
+ps l
+rake server
+rails server
+ps aux |grep rails
+kill 6494
+kill 6494
+kill 6494
+kill -l 6494
+ps auxl |grep rails
+ps auxl 
+ps l 
+ps la
+ps lax
+ps lax|grep rails
+kill -9 6494
+kill -9 6494
+kill -9 6494
+kill -l 
+ps -l 
+ps -laux 
+ps -l aux 
+ps l aux 
+ps laux 
+ps aux 
+ps aux |grep 6494
+rails server
+bundle install
+rails server
+rail console
+rails console
+rails server
+bundle install
+bundle install
+rails server
+rails server
+rails generate migration BookToCategory
+rake db:migrate
+rake db:migrate
+rails server
+make
+gnustep-config
+gnustep-config --help
+gnustep-config --variable=GNUSTEP_MAKEFILES
+make
+/usr/lib64/GNUstep/Makefiles/
+ls
+GNUstep.sh
+./cpu.sh
+./install-sh 
+sh GNUstep.sh
+cd
+cd projects/asteroids/
+make
+cat /usr/lib64/GNUstep/Makefiles/GNUstep.sh
+. /usr/lib64/GNUstep/Makefiles/GNUstep.sh
+. /usr/lib64/GNUstep/Makefiles/GNUstep.sh 
+  unset GNUSTEP_LOCAL_DOC 
+make
+ls
+git branch -a
+git branch -m billing-w1 rails-1.9
+git branch -a
+git log
+grep -r tasty_include_javascripts
+grep -R tasty_include_javascripts
+cd app/assets/; grep -R md5
+cd app/assets/; grep -R -i md5
+grep -R -i md5
+cd ../../grep -R -i md5
+cd ../../;grep -R -i md5
+coffee
+yum provides coffee
+irb
+ls
+ls
+cd app/views/feedbacks/
+ls
+git mv _feedbacks.rhtml _feedbacks.erb
+git mv _feedback.rhtml _feedback.erb
+git mv index.rhtml index.erb
+cd ../../
+cd ..
+ls
+ruby rename.rb 
+ruby rename.rb 
+ruby rename.rb 
+git update-index --no-assume-unchanged Gemfile.lock
+git citool
+git push origin
+git push origin ruby-1.9
+git push origin ruby-1.9
+git log
+git branch -a
+git status
+git branch -m rails-4
+git branch -a
+git checkout rails-4
+git checkout -f rails-4
+git push origin rails-4
+gnuplot first.gnu 
+ls
+gnuplot first.gnu 
+gnuplot first.gnu 
+gnuplot first.gnu 
+gnuplot first.gnu 
+gnuplot first.gnu 
+gnuplot first.gnu 
+gnuplot first.gnu 
+gnuplot first.gnu 
+gnuplot first.gnu 
+gnuplot first.gnu 
+gnuplot first.gnu 
+gnuplot first.gnu 
+cat post_count_dist.sql | mysql -u root 
+cat post_count_dist.sql | mysql -u root tasty_data
+cat post_count_dist.sql | mysql -u root tlogs_data
+cat post_count_dist.sql | mysql -A -u root tlogs_data
+mysql -A -u root tlogs_data
+mysql -A -u root tlogs_data
+mysql -A -s -r -u root tlogs_data
+cd ../life/
+rails server start
+rails server 
+rails server -p 3001
