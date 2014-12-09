@@ -18,8 +18,12 @@
 (global-set-key (kbd "M-h") 'backward-kill-word)
 
 ;; Color Theme
-(load-theme 'solarized-light t)
-(load-theme 'solarized-dark t)
+(defun decide-on-theme (frame)
+  (select-frame frame)
+  ;;(load-theme 'solarized-light t)
+  (load-theme 'solarized-dark t))
+
+(add-hook 'after-make-frame-functions 'decide-on-theme)
 
 
 ;; For erb, less, css
