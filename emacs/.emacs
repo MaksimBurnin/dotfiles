@@ -22,6 +22,12 @@
 (set-window-margins nil 2 2)
 (set-fringe-mode 0)
 
+(setq-default header-line-format
+              '("%e"
+                mode-line-front-space
+                mode-line-buffer-identification
+                mode-line-end-spaces))
+
 
 ;; Keybindings
 (global-set-key (kbd "C-x /") 'comment-or-uncomment-region)
