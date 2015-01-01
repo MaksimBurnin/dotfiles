@@ -41,6 +41,7 @@
   (load-theme 'solarized-dark t))
 
 (add-hook 'after-make-frame-functions 'decide-on-theme)
+(load-theme 'solarized-dark t)
 
 
 ;; For erb, less, css
