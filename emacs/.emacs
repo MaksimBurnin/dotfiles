@@ -6,7 +6,11 @@
 (package-initialize)
 
 ;; Load-path
-(add-to-list 'load-path "~/.emacs.d/")
+(add-to-list 'load-path "~/.emacs.d/elisp")
+
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize)
+  (exec-path-from-shell-copy-env "PS1"))
 
 ;; Useful stuffs
 (require 'nav)
@@ -54,7 +58,10 @@
   (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.less\\'" . less-css-mode))
+(add-to-list 'auto-mode-alist '("\\.less\\'" . less-css-mode))
+
+(setq web-mode-css-indent-offset 2)
+(setq css-indent-offset 2)
 
 ;; Ruby
 (add-to-list 'auto-mode-alist '("\\.god\\'" . ruby-mode))
