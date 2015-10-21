@@ -8,9 +8,21 @@
 ;; Load-path
 (add-to-list 'load-path "~/.emacs.d/elisp")
 
+;; MacOS env variables
 (when (memq window-system '(mac ns))
   (exec-path-from-shell-initialize)
-  (exec-path-from-shell-copy-env "PS1"))
+  (exec-path-from-shell-copy-envs '("PS1" "LANG")))
+
+(setenv "PATH"
+  (concat
+   (expand-file-name "~/.rbenv/shims/") ":"
+   (getenv "PATH")))
+
+;; Backups and lockfiles
+(setq backup-directory-alist `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
+(setq create-lockfiles nil)
+
 
 ;; Useful stuffs
 (require 'nav)
@@ -22,9 +34,9 @@
 (scroll-bar-mode 0)
 (tool-bar-mode 0)
 (menu-bar-mode 0)
-(setq-default left-margin-width 2 right-margin-width 2)
-(set-window-margins nil 2 2)
-(set-fringe-mode 0)
+(setq-default left-margin-width 0 right-margin-width 0)
+(set-window-margins nil 0 0)
+(set-fringe-mode 10)
 
 (setq-default header-line-format
               '("%e"
@@ -41,12 +53,13 @@
 ;; Color Theme
 (defun decide-on-theme (frame)
   (select-frame frame)
-  ;;(load-theme 'solarized-light t)
-  (load-theme 'solarized-dark t))
+  (load-theme 'solarized-light t)
+  ;;(load-theme 'solarized-dark t)
+  )
 
 (add-hook 'after-make-frame-functions 'decide-on-theme)
-(load-theme 'solarized-dark t)
-
+(load-theme 'solarized-light t)
+;;(load-theme 'solarized-dark t)
 
 ;; For erb, less, css
 (require 'web-mode)
@@ -58,10 +71,12 @@
   (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.less\\'" . less-css-mode))
+  (add-to-list 'auto-mode-alist '("\\.hbs\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.less\\'" . less-css-mode))
 
 (setq web-mode-css-indent-offset 2)
 (setq css-indent-offset 2)
+(setq scss-compile-at-save nil)
 
 ;; Ruby
 (add-to-list 'auto-mode-alist '("\\.god\\'" . ruby-mode))
@@ -74,10 +89,16 @@
 (add-to-list 'auto-mode-alist '("\\.coffee.erb\\'" . coffee-mode))
 (add-to-list 'auto-mode-alist '("\\.slim\\'" . slim-mode))
 
+;; Javascript
+(setq js-indent-level 2)
 
+;; Haskell
+(setq haskell-process-type 'ghci)
+
+;; PHP
+(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
 
 ;; Flymake
-
 (require 'flymake)
   (require 'flymake-haskell-multi)
   (require 'flymake-less)
@@ -100,11 +121,18 @@
   (push '(".+\\.less$" flymake-less-load) flymake-allowed-file-name-masks)
   (add-hook 'less-css-mode-hook
                   (lambda () (flymake-mode t)))
+  ;; SCSS
+  (push '(".+\\.scss$" flymake-scss-init) flymake-allowed-file-name-masks)
+  (add-hook 'less-css-mode-hook
+                  (lambda () (flymake-mode t)))
 
 
 ;;tabs
 
-  ;;(setq indent-line-function 'insert-space)
+;;(setq indent-line-function 'insert-space)
+(setq-default mode-require-final-newline t)
+(setq-default indicate-buffer-boundaries t)
+(setq-default indicate-empty-lines t)
 
 (setq tabed-modes  '(makefile-gmake-mode makefile-mode))
 (setq wraped-modes '(shell-mode))
@@ -120,20 +148,24 @@
       (progn (setq indent-tabs-mode t)
              (setq tab-width 4)
              (setq before-change-functions ()))
-    )
-  )
+      ))
+
+(defun indent-with-tabs ()
+  (interactive)
+  (set-tabs t))
+
 (defun decide-on-tabs ()
   "Decide if we need tabs in current mode"
   (if (member major-mode tabed-modes)
-      (progn (set-tabs t)
-             (message "%s %s" major-mode "Tabbed mode"))
-      (progn (set-tabs nil)
-             (message "%s %s" major-mode "No-Tabs mode"))))
+      (set-tabs t)
+      (set-tabs nil)
+      ))
 
 (defun decide-on-wrap ()
   "Decide if we need word-wrap in current mode"
   (let ((truncated (member major-mode wraped-modes)))
     (setq truncate-lines (not truncated))))
+
 
 (add-hook 'after-change-major-mode-hook 'decide-on-tabs)
 (add-hook 'after-change-major-mode-hook 'decide-on-wrap)
@@ -143,13 +175,13 @@
 (global-whitespace-newline-mode 1)
 (setq whitespace-display-mappings
       '(
-        ;;  (space-mark   ?\     [?.]) ;; use space not dot
+        ;;(space-mark   ?\     [?.]) ;; use space not dot
         (space-mark   ?\xA0  [?\u00A4]     [?_])
         (space-mark   ?\x8A0 [?\x8A4]      [?_])
         (space-mark   ?\x920 [?\x924]      [?_])
         (space-mark   ?\xE20 [?\xE24]      [?_])
         (space-mark   ?\xF20 [?\xF24]      [?_])
-        ;;  (newline-mark ?\n    [?$ ?\n])
+        ;;(newline-mark ?\n    [?$ ?\n])
         (tab-mark     ?\t    [?\u00BB ?\t] [?\\ ?\t])))
 
 (custom-set-faces
