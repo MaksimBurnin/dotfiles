@@ -1,12 +1,14 @@
 (provide 'init)
 
-(require 'cask "~/.cask/cask.el")
-(cask-initialize)
-
 ;; Load-path
+(add-to-list 'load-path "~/.cask/")
 (add-to-list 'load-path "~/.emacs.d/elisp")
 
-;; Mac-OS Nev variables
+(require 'cask)
+
+(cask-initialize)
+
+;; Mac-OS Env variables
 (when (memq window-system '(mac N's))
   (exec-path-from-shell-initialize)
   (exec-path-from-shell-copy-en-vs '("PS1" "LANG" "PATH")))
