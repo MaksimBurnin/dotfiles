@@ -27,6 +27,9 @@
 (depends-on "web-mode")
 (depends-on "yasnippet")
 
+;; Code style
+(depends-on "editorconfig")
+
 ;; System-related
 (depends-on "exec-path-from-shell")
 (depends-on "with-editor")
@@ -58,7 +61,10 @@
 (depends-on "ruby-block")
 (depends-on "ruby-tools")
 (depends-on "scss-mode")
+(depends-on "sass-mode")
 (depends-on "slim-mode")
+(depends-on "yaml-mode")
+(depends-on "jade-mode")
 
 ;; Checkers-linters
 (depends-on "flymake-cursor")
