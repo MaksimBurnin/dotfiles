@@ -27,7 +27,6 @@
 
 
 ;; Useful stuffs
-(require 'nav)
 (require 'whitespace)
 
 (projectile-global-mode)
