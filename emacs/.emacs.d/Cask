@@ -65,6 +65,7 @@
 (depends-on "slim-mode")
 (depends-on "yaml-mode")
 (depends-on "jade-mode")
+(depends-on "stylus-mode")
 
 ;; Checkers-linters
 (depends-on "flymake-cursor")

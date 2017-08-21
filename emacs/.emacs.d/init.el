@@ -14,7 +14,7 @@
   (exec-path-from-shell-copy-en-vs '("PS1" "LANG" "PATH")))
 (setq exec-path
   (append exec-path
-    '("/usr/local/bin" "/bin" "/bin" "/usr/bin")))
+    '("~/.rbenv/shims" "/usr/local/bin" "/bin" "/bin" "/usr/bin")))
 
 ;;(steno "PATH"
 ;;  (con-cat
@@ -31,11 +31,12 @@
 ;; Useful stuffs
 (require 'whitespace)
 
+(editorconfig-mode 1)
 (projectile-global-mode)
 (helm-mode 1)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (ac-config-default)
-(smartparens-global-mode)
+(smartparens-global-mode 0)
 (show-smartparens-global-mode t)
 
 ;; Startup
@@ -85,9 +86,25 @@
   (add-to-list 'auto-mode-alist '("\\.hbs\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.less\\'" . less-css-mode))
 
-(setq web-mode-css-indent-offset 2)
-(setq css-indent-offset 2)
+(setq web-mode-engines-alist '(("php" . "\\.tpl\\'")))
+
+(defun web-mode-indents-hook ()
+  (setq web-mode-block-padding 0)
+  (setq web-mode-code-indent-offset 2)
+  (setq web-mode-enable-auto-pairing nil)
+  ;; (setq web-mode-markup-indent-offset 2)
+  ;; (setq web-mode-code-indent-offset 2)
+  ;; (setq web-mode-css-indent-offset 2)
+)
+
+(add-hook 'web-mode-hook  'web-mode-indents-hook)
+
+(add-hook 'editorconfig-custom-hooks
+          (lambda (hash) (setq web-mode-block-padding 0)))
+
+;; (setq css-indent-offset 2)
 (setq scss-compile-at-save nil)
+
 
 ;; Ruby
 (add-to-list 'auto-mode-alist '("\\.god\\'" . ruby-mode))
@@ -141,36 +158,36 @@
 ;;tabs
 
 ;;(setq indent-line-function 'insert-space)
-(setq-default mode-require-final-newline t)
-(setq-default indicate-buffer-boundaries t)
-(setq-default indicate-empty-lines t)
+;; (setq-default mode-require-final-newline t)
+;; (setq-default indicate-buffer-boundaries t)
+;; (setq-default indicate-empty-lines t)
 
-(setq tabed-modes  '(makefile-gmake-mode makefile-mode))
+;; (setq tabed-modes  '(makefile-gmake-mode makefile-mode))
 (setq wraped-modes '(shell-mode))
-(defun set-tabs (usetabs)
-  "get rid of tabs. indent with 2 spaces"
-  (if (not usetabs)
-      (progn (setq indent-tabs-mode nil)
-             (setq tab-width 2)
-             (add-hook 'before-change-functions
-                       (lambda (&rest args)
-                         (if (not (buffer-modified-p))
-                             (untabify (point-min) (point-max))))))
-      (progn (setq indent-tabs-mode t)
-             (setq tab-width 4)
-             (setq before-change-functions ()))
-      ))
+;; (defun set-tabs (usetabs)
+;;   "get rid of tabs. indent with 2 spaces"
+;;   (if (not usetabs)
+;;       (progn (setq indent-tabs-mode nil)
+;;              (setq tab-width 2)
+;;              (add-hook 'before-change-functions
+;;                        (lambda (&rest args)
+;;                          (if (not (buffer-modified-p))
+;;                              (untabify (point-min) (point-max))))))
+;;       (progn (setq indent-tabs-mode t)
+;;              (setq tab-width 4)
+;;              (setq before-change-functions ()))
+;;       ))
 
-(defun indent-with-tabs ()
-  (interactive)
-  (set-tabs t))
+;; (defun indent-with-tabs ()
+;;   (interactive)
+;;   (set-tabs t))
 
-(defun decide-on-tabs ()
-  "Decide if we need tabs in current mode"
-  (if (member major-mode tabed-modes)
-      (set-tabs t)
-      (set-tabs nil)
-      ))
+;; (defun decide-on-tabs ()
+;;   "Decide if we need tabs in current mode"
+;;   (if (member major-mode tabed-modes)
+;;       (set-tabs t)
+;;       (set-tabs nil)
+;;       ))
 
 (defun decide-on-wrap ()
   "Decide if we need word-wrap in current mode"
@@ -178,7 +195,7 @@
     (setq truncate-lines (not truncated))))
 
 
-(add-hook 'after-change-major-mode-hook 'decide-on-tabs)
+;; (add-hook 'after-change-major-mode-hook 'decide-on-tabs)
 (add-hook 'after-change-major-mode-hook 'decide-on-wrap)
 (run-mode-hooks)
 
