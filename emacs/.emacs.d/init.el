@@ -45,6 +45,7 @@
 (scroll-bar-mode 0)
 (tool-bar-mode 0)
 (menu-bar-mode 0)
+(nyan-mode t)
 (setq-default left-margin-width 0 right-margin-width 0)
 (set-window-margins nil 0 0)
 (set-fringe-mode 10)
