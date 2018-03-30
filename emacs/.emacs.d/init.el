@@ -49,6 +49,10 @@
 (setq-default left-margin-width 0 right-margin-width 0)
 (set-window-margins nil 0 0)
 (set-fringe-mode 10)
+(add-hook 'after-init-hook #'global-emojify-mode)
+
+(define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
+(global-fci-mode 1)
 
 (setq-default header-line-format
               '("%e"
@@ -89,10 +93,17 @@
 
 (setq web-mode-engines-alist '(("php" . "\\.tpl\\'")))
 
+
 (defun web-mode-indents-hook ()
   (setq web-mode-block-padding 0)
   (setq web-mode-code-indent-offset 2)
   (setq web-mode-enable-auto-pairing nil)
+
+  (add-to-list 'web-mode-indentation-params '("lineup-args" . nil))
+  (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil))
+  (add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
+  (add-to-list 'web-mode-indentation-params '("lineup-ternary" . nil))
+
   ;; (setq web-mode-markup-indent-offset 2)
   ;; (setq web-mode-code-indent-offset 2)
   ;; (setq web-mode-css-indent-offset 2)
@@ -223,7 +234,7 @@
  '(whitespace-tab ((((class color) (background dark)) (:background "red" :foreground "white")) (((class color) (background light)) (:background "yellow" :foreground "black")) (t (:inverse-video t))))
  '(whitespace-trailing ((((class color) (background dark)) (:background "red" :foreground "white")) (((class color) (background light)) (:background "yellow" :foreground "black")) (t (:inverse-video t)))))
 
-(setq whitespace-style (quote (trailing face tabs newline space-mark tab-mark newline-mark lines-tail)))
+(setq whitespace-style (quote (trailing face tabs newline space-mark tab-mark newline-mark)))
 (setq show-trailing-whitespace t)
 (global-whitespace-mode 1)
 
